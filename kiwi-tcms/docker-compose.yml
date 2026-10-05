@@ -1,0 +1,39 @@
+# El nombre fija el prefijo de los volumenes (kiwi-tcms_kiwi_db_data), asi los datos
+# cargados se conservan aunque se levante desde otra carpeta.
+name: kiwi-tcms
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: kiwi_db
+    environment:
+      MYSQL_ROOT_PASSWORD: kiwi
+      MYSQL_DATABASE: kiwi
+      MYSQL_USER: kiwi
+      MYSQL_PASSWORD: kiwi
+    volumes:
+      - kiwi_db_data:/var/lib/mysql
+    restart: unless-stopped
+
+  web:
+    image: kiwitcms/kiwi
+    container_name: kiwi_web
+    depends_on:
+      - db
+    environment:
+      KIWI_DB_ENGINE: django.db.backends.mysql
+      KIWI_DB_HOST: db
+      KIWI_DB_PORT: "3306"
+      KIWI_DB_NAME: kiwi
+      KIWI_DB_USER: kiwi
+      KIWI_DB_PASSWORD: kiwi
+    ports:
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8443:8443"
+    volumes:
+      - kiwi_uploads:/Kiwi/uploads
+    restart: unless-stopped
+
+volumes:
+  kiwi_db_data:
+  kiwi_uploads:

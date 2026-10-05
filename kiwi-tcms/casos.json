@@ -1,0 +1,266 @@
+[
+ {
+  "id": "CP-001-RFM1-04",
+  "titulo": "Inicio de sesión exitoso con credenciales válidas",
+  "objetivo": "Validar que un usuario registrado pueda acceder al sistema ingresando su email y contraseña correctos",
+  "req": "AYA-M01-RF-04",
+  "pre": [
+   "El usuario debe estar previamente creado y registrado en la base de datos."
+  ],
+  "datos": [
+   "Usuario: admin@agendaya.com",
+   "Contraseña:",
+   "Contrasena123!"
+  ],
+  "tipo": "Positiva",
+  "pasos": [
+   [
+    "En la pantalla de inicio, ir al Login del sistema",
+    "Se muestra el formulario solicitando usuario y contraseña"
+   ],
+   [
+    "Ingresar el usuario (admin@agendaya.com) y la contraseña (Contrasena123!)",
+    "El sistema permite el ingreso de los datos."
+   ],
+   [
+    "Hacer click izquierdo en el botón de “Ingresar”",
+    "El sistema valida las credenciales y redirige al usuario a la pantalla principal del sistema (estado final)."
+   ]
+  ],
+  "notas": "Se asume que el usuario tiene el rol correspondiente para acceder al Módulo 1."
+ },
+ {
+  "id": "CP-002-RFM1-04",
+  "titulo": "Inicio de sesión denegado por contraseña incorrecta.",
+  "objetivo": "Validar que el sistema impida el acceso y muestre un error cuando se ingresa una contraseña que no coincide con la del usuario.",
+  "req": "AYA-M01-RF-04",
+  "pre": [
+   "El usuario debe estar previamente creado y registrado en la base de datos."
+  ],
+  "datos": [
+   "Usuario: admin@agendaya.com",
+   "Contraseña:",
+   "ContrasenaInvalida123"
+  ],
+  "tipo": "Negativa",
+  "pasos": [
+   [
+    "En la pantalla de inicio, ir al Login del sistema",
+    "Se muestra el formulario solicitando usuario y contraseña"
+   ],
+   [
+    "Ingresar el usuario (admin@agendaya.com) y la contraseña (ContrasenaInvalida123)",
+    "El sistema permite el ingreso de los datos."
+   ],
+   [
+    "Hacer click izquierdo en el botón de “Ingresar”",
+    "El sistema no permite el ingreso, muestra en pantalla el mensaje “Contrasena incorrecta, intentelo de nuevo.” y limpia el campo de contraseña."
+   ]
+  ],
+  "notas": "Verificar que al fallar el ingreso, el campo de contraseña se limpie automáticamente por seguridad."
+ },
+ {
+  "id": "CP-003-RFM1-01",
+  "titulo": "Registro de administrador exitoso con credenciales válidas.",
+  "objetivo": "Validar que el sistema permita crear una cuenta nueva al ingresar un email válido y una contraseña que cumpla con los requisitos de seguridad.",
+  "req": "AYA-M01-RF-01",
+  "pre": [
+   "El administrador se encuentra en la pantalla de registro.",
+   "El email a utilizar no debe estar previamente en la base de datos."
+  ],
+  "datos": [
+   "Nombre: Leonel Messi",
+   "Email: leo.messi@gmail.com",
+   "Contraseña: Messimessi12"
+  ],
+  "tipo": "Positiva",
+  "pasos": [
+   [
+    "En la pantalla de registro, indicar el nombre, email y contraseña en los campos correspondientes.",
+    "Se muestra el formulario solicitando nombre, usuario y contraseña."
+   ],
+   [
+    "Con click izquierdo, presionar el botón de “Registrarse”.",
+    "El sistema procesa el registro exitosamente y carga la vista del Dashboard."
+   ]
+  ],
+  "notas": "N/A"
+ },
+ {
+  "id": "CP-004-RFM1-01",
+  "titulo": "Registro denegado por email ya existente en el sistema.",
+  "objetivo": "Verificar que el sistema rechace la creación de una cuenta y maneje la excepción correctamente si el email ingresado ya se encuentra registrado.",
+  "req": "AYA-M01-RF-01",
+  "pre": [
+   "El administrador se encuentra en la pantalla de registro.",
+   "Ya existe un usuario en la base de datos registrado con el email (leo.messi@gmail.com)"
+  ],
+  "datos": [
+   "Nombre: Leonel Messi",
+   "Email: leo.messi@gmail.com",
+   "Contraseña: Messimessi13"
+  ],
+  "tipo": "Negativa",
+  "pasos": [
+   [
+    "En la pantalla de registro, ingresar los datos de prueba en los campos correspondientes",
+    "Se muestra el formulario solicitando nombre, correo electrónico y contraseña."
+   ],
+   [
+    "Con click izquierdo, presionar el botón de “Registrarse”",
+    "El sistema no crea la cuenta, detiene el proceso y muestra en pantalla un mensaje de error indicando que el correo ya existe en el sistema."
+   ]
+  ],
+  "notas": "El mensaje de error debe ser claro para el usuario."
+ },
+ {
+  "id": "CP-005-RFM1-02",
+  "titulo": "Solicitud de recuperación exitosa con correo registrado.",
+  "objetivo": "Validar que el sistema envíe correctamente el enlace de restablecimiento de contraseña al ingresar un correo electrónico existente.",
+  "req": "AYA-M01-RF-02",
+  "pre": [
+   "El administrador debe tener una cuenta creada previamente en el sistema con un correo electrónico valido y activo."
+  ],
+  "datos": [
+   "Email: hola.comova@agendaya.com"
+  ],
+  "tipo": "Positiva",
+  "pasos": [
+   [
+    "En la pantalla de login, hacer click en el enlace “Olvidaste tu contrasena?”.",
+    "El sistema redirige al usuario a la pantalla de recuperación y muestra un formulario solicitando el correo electrónico."
+   ],
+   [
+    "Ingresar el correo hola.comova@agendaya.com en el campo correspondiente.",
+    "El sistema acepta los caracteres ingresados en el campo de texto."
+   ],
+   [
+    "Presionar el botón “Enviar el enlace de recuperacion”.",
+    "El sistema procesa la solicitud, muestra un mensaje de éxito en pantalla (“Revisa tu correo de entrada”) y dispara el envío automático del email con el enlace de recuperación."
+   ]
+  ],
+  "notas": "El tester deberá verificar que el email se haya disparado. En el entorno de prueba los correos no se envían por SMTP: se registran en la consola del servidor y en el archivo data/correos.log."
+ },
+ {
+  "id": "CP-006-RFM1-02",
+  "titulo": "Solicitud de recuperación denegada por correo inexistente.",
+  "objetivo": "Verificar que el sistema rechace la solicitud y muestre una advertencia cuando se intenta recuperar la contraseña de un correo que no está en la base de datos.",
+  "req": "AYA-M01-RF-02",
+  "pre": [
+   "El sistema y la base de datos deben estar funcionando correctamente."
+  ],
+  "datos": [
+   "Email: hola.comova12@agendaya.com"
+  ],
+  "tipo": "Negativa",
+  "pasos": [
+   [
+    "En la pantalla de login, hacer click en el enlace “Olvidaste tu contrasena?”.",
+    "El sistema redirige a la pantalla de recuperación y muestra un formulario solicitando el correo electrónico."
+   ],
+   [
+    "Ingresar el correo hola.comova12@agendaya.com en el campo correspondiente.",
+    "El sistema acepta los caracteres ingresados en el campo de texto."
+   ],
+   [
+    "Presionar el botón “Enviar el enlace de recuperacion”.",
+    "El sistema valida contra la base de datos, no envía ningún correo y muestra en pantalla un mensaje de error claro (“El correo ingresado no se encuentra previamente registrado”)"
+   ]
+  ],
+  "notas": "El mensaje esperado es específico, tal como lo define este caso. Por seguridad se recomienda, para una próxima iteración, reemplazarlo por un mensaje genérico que no revele si el correo está registrado (evita la enumeración de cuentas)."
+ },
+ {
+  "id": "CP-007-RFM4-03",
+  "titulo": "Confirmación de reserva exitosa con datos obligatorios completos.",
+  "objetivo": "Validar que el sistema registre la reserva en estado confirmada y notifique las partes al ingresar nombre y correo válidos.",
+  "req": "AYA-M04-RF-03",
+  "pre": [
+   "El usuario invitado seleccionó un horario disponible en la agenda de reservas."
+  ],
+  "datos": [
+   "Nombre completo: Juan Perez",
+   "Correo electrónico: juan.perez@ejemplo.com",
+   "Teléfono: [empty]",
+   "Nota: [empty]"
+  ],
+  "tipo": "Positiva",
+  "pasos": [
+   [
+    "En la pantalla de solicitud de reserva ingresar el nombre y correo en los campos correspondientes del formulario.",
+    "El sistema permite el ingreso de la información."
+   ],
+   [
+    "Presionar el botón de “Confirmar Reserva” con el click izquierdo",
+    "El sistema registra la reserva en estado “Confirmada”, envía un email automático al invitado y una notificación al administrador."
+   ]
+  ],
+  "notas": "El tester deberá verificar que se hayan disparado ambos correos (invitado y administrador). En el entorno de prueba se registran en la consola del servidor y en el archivo data/correos.log."
+ },
+ {
+  "id": "CP-008-RFM4-03",
+  "titulo": "Error al confirmar reserva por falta de correo electrónico.",
+  "objetivo": "Verificar que el sistema bloquee el envío del formulario si no se completa con uno de los datos obligatorios.",
+  "req": "AYA-M04-RF-03",
+  "pre": [
+   "El usuario invitado se encuentra en el formulario de confirmación con un horario seleccionado."
+  ],
+  "datos": [
+   "Nombre completo: Juan Perez",
+   "Correo electrónico: [empty]",
+   "Teléfono: [empty]",
+   "Nota: [empty]"
+  ],
+  "tipo": "Negativa",
+  "pasos": [
+   [
+    "Ingresar el nombre y dejar el campo de correo electrónico vacío.",
+    "El campo de nombre acepta el dato y el email queda sin completar."
+   ],
+   [
+    "Presionar el botón de “Confirmar Reserva” con el click izquierdo",
+    "El sistema bloquea el envío del formulario, no registra la reserva y resalta el campo de correo electrónico indicando que es obligatorio."
+   ]
+  ],
+  "notas": "N/A"
+ },
+ {
+  "id": "CP-009-RFM4-05",
+  "titulo": "Deshabilitar el botón de confirmación tras un click.",
+  "objetivo": "Validar que el botón de confirmación se deshabilite y cambie su texto inmediatamente al hacer click, evitando múltiples envíos.",
+  "req": "AYA-M04-RF-05",
+  "pre": [
+   "El usuario invitado ha completado todos los campos obligatorios del formulario de reserva y aún no ha confirmado el mismo."
+  ],
+  "datos": [
+   "1 solo click izquierdo sobre el mouse por encima del botón “Confirmar Reserva”"
+  ],
+  "tipo": "Positiva",
+  "pasos": [
+   [
+    "Hacer click izquierdo una vez en el botón de “Confirmar Reserva”.",
+    "Inmediatamente después del click, el botón se deshabilita visualmente y muestra el estado “Procesando reserva…”. Finalmente, el sistema registra una única solicitud en la base de datos."
+   ]
+  ],
+  "notas": "Prestar atención a que el cambio visual sea instantáneo para proveer feedback inmediato al usuario."
+ },
+ {
+  "id": "CP-010-RFM4-05",
+  "titulo": "Prevención de reservas duplicadas ante clicks múltiples simultáneos.",
+  "objetivo": "Verificar que el sistema procese únicamente la primera petición, ignorando los clicks subsecuentes rápidos para evitar una doble reserva.",
+  "req": "AYA-M04-RF-05",
+  "pre": [
+   "El usuario invitado se encuentra en el formulario listo para confirmar, con los datos obligatorios ya cargados."
+  ],
+  "datos": [
+   "Doble click muy rápido (o múltiples clicks repetidos) sobre el botón de “Confirmar Reserva”."
+  ],
+  "tipo": "Negativa",
+  "pasos": [
+   [
+    "Hacer click rápida y repetidamente (mínimo 2 veces en menos de 1 segundo) sobre el botón de “Confirmar Reserva”.",
+    "El sistema captura el primer click, desactiva inmediatamente el botón cambiando su estado a “Procesando reserva…” e ignora por completo los clicks posteriores. Solo se crea 1 registro en la base de datos para ese turno."
+   ]
+  ],
+  "notas": "Se requerirá acceso a la Base de Datos al finalizar la prueba para confirmar categóricamente que no se generaron registros duplicados para el mismo invitado y horario."
+ }
+]

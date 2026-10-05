@@ -1,3 +1,8 @@
 node_modules/
-data/db.json
-data/correos.log
+
+# Estado local de las pruebas (se regenera con `npm run reset`)
+app/data/db.json
+app/data/correos.log
+
+# Material de la catedra: queda solo en la copia local
+docs/enunciado/

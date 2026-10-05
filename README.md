@@ -1,19 +1,51 @@
-# AgendaYa
+# AgendaYa — TP N.º 5: Casos de prueba
 
-Funcionalidad mínima del sistema AgendaYa, desarrollada para poder ejecutar los
-casos de prueba diseñados en el **Trabajo Práctico N.º 5** de Ingeniería y
-Calidad de Software (UTN FRM, 4K10 — Grupo 4).
+Trabajo Práctico N.º 5 de Ingeniería y Calidad de Software (UTN FRM, 4K10 —
+Grupo 4), sobre los módulos 1 (Autenticación) y 4 (Reservas) del sistema
+AgendaYa.
 
-No es el sistema completo: se implementó únicamente lo que cubren los diez casos
-de prueba, tal como indica el punto 4 del enunciado.
+**Integrantes:** Barchiesi Santino (50791), Estudillo Máximo (50013), García
+Joaquín (50914), Navarro Matías (51006) y Martinez Fernando (51192).
 
-## Requisitos
+El repositorio reúne todo el trabajo:
+
+| Entregable | Dónde |
+|---|---|
+| Informe (casos de prueba, evidencias y lecciones aprendidas) | [`docs/informe/TP5-Grupo4-Casos-de-prueba.pdf`](docs/informe/TP5-Grupo4-Casos-de-prueba.pdf) |
+| Codificación de la funcionalidad probada | [`app/`](app) |
+| Herramienta de gestión (Kiwi TCMS) y carga de los casos | [`kiwi-tcms/`](kiwi-tcms) |
+| Capturas de la ejecución y de Kiwi | [`docs/evidencias/`](docs/evidencias) |
+
+## Estructura
+
+```
+app/                       Funcionalidad minima de AgendaYa (Node.js + Express)
+  server.js                Endpoints HTTP y reglas de negocio
+  src/db.js                Persistencia en archivo JSON
+  src/correo.js            Envio de correo (registrado en consola y bitacora)
+  public/                  Pantallas (ingreso, registro, recuperacion, reserva, panel)
+  scripts/reset-db.js      Reinicio del estado de prueba
+  data/                    Base de datos y bitacora de correos (se crean al arrancar)
+kiwi-tcms/                 Kiwi TCMS con Docker y script de carga de los 10 casos
+docs/
+  informe/                 Informe del TP en PDF y Word
+  evidencias/app/          Capturas de la ejecucion de CP-001 a CP-010
+  evidencias/kiwi/         Capturas de Kiwi TCMS (plan, casos, usuarios y roles)
+```
+
+## La aplicación
+
+Se implementó únicamente la funcionalidad que cubren los diez casos de prueba,
+tal como indica el punto 4 del enunciado. No es el sistema completo.
+
+### Requisitos
 
 - Node.js 18 o superior (se desarrolló con Node 24)
 
-## Puesta en marcha
+### Puesta en marcha
 
 ```
+cd app
 npm install
 npm start
 ```
@@ -34,23 +66,6 @@ Corresponden a los prerrequisitos de los casos de prueba.
 |---|---|---|
 | admin@agendaya.com | Contrasena123! | CP-001, CP-002 |
 | hola.comova@agendaya.com | Recuperar2025! | CP-005 |
-
-## Estructura
-
-```
-server.js              Endpoints HTTP y reglas de negocio
-src/db.js              Persistencia en archivo JSON
-src/correo.js          Envío de correo (registrado en consola y bitácora)
-public/                Pantallas
-  index.html           Ingreso
-  registro.html        Crear cuenta
-  recuperar.html       Recuperar contraseña
-  restablecer.html     Fijar contraseña nueva
-  reservar.html        Reserva de turno
-  dashboard.html       Panel del administrador
-scripts/reset-db.js    Reinicio del estado de prueba
-data/                  Base de datos y bitácora de correos (se crean al arrancar)
-```
 
 ## Requerimientos implementados
 
@@ -82,7 +97,7 @@ No se crea la cuenta y el campo queda resaltado con el motivo.
 
 **CP-005 — Recuperación con correo registrado.** En `/recuperar.html`, ingresar
 `hola.comova@agendaya.com`. Aparece *Revisa tu correo de entrada*. El correo
-enviado se verifica en la consola del servidor o en `data/correos.log`.
+enviado se verifica en la consola del servidor o en `app/data/correos.log`.
 
 **CP-006 — Recuperación con correo inexistente.** Repetir con
 `hola.comova12@agendaya.com`. No se envía ningún correo y se muestra *El correo
@@ -128,7 +143,7 @@ base real no obligaría a modificar `server.js`.
 
 **Correo registrado en lugar de enviado.** Los casos CP-005 y CP-007 requieren
 verificar que el envío se dispara. Escribir el correo en consola y en
-`data/correos.log` permite comprobarlo de forma objetiva sin depender de una
+`app/data/correos.log` permite comprobarlo de forma objetiva sin depender de una
 casilla real ni de un servicio externo.
 
 **Hash de contraseñas con `crypto.scrypt`.** Se usa el módulo nativo de Node en
@@ -176,7 +191,8 @@ Capturas de la ejecución de los casos de prueba y de la herramienta de gestión
 
 ### Kiwi TCMS (`docs/evidencias/kiwi`)
 
-Los casos se gestionaron en Kiwi TCMS, instalado localmente con Docker. Se creó
+Los casos se gestionaron en Kiwi TCMS, instalado localmente con Docker (ver
+[`kiwi-tcms/README.md`](kiwi-tcms/README.md) para levantarlo y cargar los casos). Se creó
 el producto AgendaYA, el plan de pruebas TP-1 con los 10 casos y un usuario por
 integrante: `santino` con rol Administrator y `maximo`, `joaquin`, `matias` y
 `fernando` con rol Tester.
