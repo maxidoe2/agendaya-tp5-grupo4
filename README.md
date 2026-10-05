@@ -142,3 +142,51 @@ encuentra previamente registrado*, y así fue implementado. La propia nota del
 caso observa que, por seguridad, convendría un mensaje genérico que no revele si
 un correo está registrado o no, ya que permite enumerar cuentas válidas. Queda
 señalado como mejora para una próxima iteración.
+
+## Limitaciones conocidas
+
+Al tratarse de la funcionalidad mínima para ejecutar los casos de prueba, quedan
+fuera de alcance aspectos que el sistema completo debería cubrir:
+
+- `/api/reservas` y `/api/estado` no requieren sesión, por lo que los datos de los
+  invitados quedan accesibles. El enunciado exige que no sean públicos.
+- El inicio de sesión responde *El usuario no existe* ante un correo no
+  registrado, lo que también permite enumerar cuentas (igual que el CP-006).
+- Los horarios están fijos y no se valida que el turno sea futuro.
+- La sesión del panel se guarda solo en el navegador; no hay token en el servidor.
+
+## Evidencias
+
+Capturas de la ejecución de los casos de prueba y de la herramienta de gestión.
+
+### Ejecución de los casos (`docs/evidencias/app`)
+
+| Caso | Captura |
+|---|---|
+| CP-001 | [Inicio de sesión exitoso](docs/evidencias/app/CP-001.png) |
+| CP-002 | [Contraseña incorrecta](docs/evidencias/app/CP-002.png) |
+| CP-003 | [Registro exitoso](docs/evidencias/app/CP-003.png) |
+| CP-004 | [Correo ya registrado](docs/evidencias/app/CP-004.png) |
+| CP-005 | [Recuperación con correo registrado](docs/evidencias/app/CP-005.png) · [correo enviado](docs/evidencias/app/CP-005-Verificacion.png) |
+| CP-006 | [Recuperación con correo inexistente](docs/evidencias/app/CP-006.png) |
+| CP-007 | [Reserva confirmada](docs/evidencias/app/CP-007.png) · [correos enviados](docs/evidencias/app/CP-007-Verificacion.png) |
+| CP-008 | [Falta el correo](docs/evidencias/app/CP-008.png) |
+| CP-009 | [Botón deshabilitado tras un click](docs/evidencias/app/CP-009.png) |
+| CP-010 | [Clicks múltiples](docs/evidencias/app/CP-010.png) · [un único registro](docs/evidencias/app/CP-010-Verificacion.png) |
+
+### Kiwi TCMS (`docs/evidencias/kiwi`)
+
+Los casos se gestionaron en Kiwi TCMS, instalado localmente con Docker. Se creó
+el producto AgendaYA, el plan de pruebas TP-1 con los 10 casos y un usuario por
+integrante: `santino` con rol Administrator y `maximo`, `joaquin`, `matias` y
+`fernando` con rol Tester.
+
+- [Producto AgendaYA](docs/evidencias/kiwi/01_kiwi_producto_agendaya.png)
+- [Plan de pruebas con los 10 casos](docs/evidencias/kiwi/02_kiwi_plan_de_pruebas_10_casos.png)
+- [Detalle del caso CP-002](docs/evidencias/kiwi/03_kiwi_detalle_cp002.png)
+- [Usuarios del equipo](docs/evidencias/kiwi/04_kiwi_usuarios_del_equipo.png)
+- Roles: [santino](docs/evidencias/kiwi/05_kiwi_rol_administrator_santino.png) ·
+  [maximo](docs/evidencias/kiwi/05_kiwi_rol_tester_maximo.png) ·
+  [joaquin](docs/evidencias/kiwi/05_kiwi_rol_tester_joaquin.png) ·
+  [matias](docs/evidencias/kiwi/05_kiwi_rol_tester_matias.png) ·
+  [fernando](docs/evidencias/kiwi/05_kiwi_rol_tester_fernando.png)
