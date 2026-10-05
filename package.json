@@ -1,0 +1,13 @@
+{
+  "name": "agendaya",
+  "version": "1.0.0",
+  "description": "AgendaYa - funcionalidad minima para ejecutar los casos de prueba del TP N5 (Ingenieria y Calidad de Software - UTN FRM)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "reset": "node scripts/reset-db.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
