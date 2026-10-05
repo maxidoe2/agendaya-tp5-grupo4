@@ -6,3 +6,6 @@ app/data/correos.log
 
 # Material de la catedra: queda solo en la copia local
 docs/enunciado/
+
+# Respaldo local de los archivos previos a la reorganizacion
+respaldo-*.tgz
